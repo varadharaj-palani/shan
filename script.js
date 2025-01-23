@@ -27,6 +27,29 @@ const reasons = [
     "No one else will do.", "You're everything I've been dreaming of."
 ];
 
+const sadCatGifs = [
+    "./images/sad1.gif",
+    "./images/sad2.gif",
+    "./images/sad3.gif",
+    "./images/sad4.gif",
+    "./images/sad5.gif",
+    "./images/sad6.gif",
+    "./images/sad7.gif",
+    "./images/sad8.gif",
+    "./images/sad9.gif",
+    "./images/sad10.gif",
+    "./images/sad11.gif",
+    "./images/sad12.gif",
+    "./images/sad13.gif"
+];
+
+const happyCatGifs = [
+    "./images/hap1.gif",
+    "./images/hap2.gif",
+    "./images/hap3.gif",
+    "./images/hap4.gif"
+];
+
 // Optimized function to generate a challenge message
 function generateChallengeMessage() {
     const emotionIndex = Math.floor(Math.random() * emotions.length);
@@ -57,6 +80,7 @@ yesBtn.addEventListener("click", () => {
     congratsMessage.style.display = 'block';
     confettiContainer.style.display = 'block';
 
+    showCatGif(happyCatGifs);
     // Start generating confetti indefinitely after the user clicks "Yes"
     setInterval(createConfetti, 70); // Create a new piece of confetti every 100ms
 });
@@ -67,11 +91,30 @@ noBtn.addEventListener("click", () => {
     const newChallengeMessage = generateChallengeMessage();
     const messageHeader = messageDiv.querySelector("h1");
     messageHeader.textContent = newChallengeMessage;
+    showCatGif(sadCatGifs);
     adjustButtonSize(yesBtn, noBtn);
 });
 
 // Adjust button sizes on click
 function adjustButtonSize(yesBtn, noBtn) {
-    noBtn.style.transform = 'scale(0.95)';
-    yesBtn.style.transform = 'scale(1.05)';
+    // Get current scale of the buttons
+    const yesBtnScale = parseFloat(getComputedStyle(yesBtn).transform.split(',')[3]) || 1;
+    const noBtnScale = parseFloat(getComputedStyle(noBtn).transform.split(',')[3]) || 1;
+
+    // Calculate 1% increase for Yes and 5% decrease for No
+    const newYesBtnScale = yesBtnScale * 1.01; // Increase by 5%
+    const newNoBtnScale = noBtnScale * 0.95; // Decrease by 5%
+
+    // Apply new scale values
+    yesBtn.style.transform = `scale(${newYesBtnScale})`;
+    noBtn.style.transform = `scale(${newNoBtnScale})`;
+}
+
+function showCatGif(gifArray) {
+    // Get a random GIF URL and message
+    const randomGif = gifArray[Math.floor(Math.random() * gifArray.length)];
+    // Set the GIF source and message text
+    catImage.src = randomGif;
+    // Display the image container
+    // imageContainer.style.display = "block";
 }
