@@ -2,6 +2,7 @@
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const messageDiv = document.getElementById("message");
+const catImage = document.getElementById("catImage");
 const congratsMessage = document.getElementById("congratsMessage");
 const confettiContainer = document.getElementById("confettiContainer");
 
